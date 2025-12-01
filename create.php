@@ -1,6 +1,7 @@
 <?php
 $dsn='mysql:host=localhost;dbname=company;charset=utf8';
 $pdo= new PDO($dsn,'root','');
+
 $cols=array_keys($_POST);
 
 $sql="INSERT INTO users ";
