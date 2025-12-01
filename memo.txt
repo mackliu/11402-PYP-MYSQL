@@ -1,0 +1,50 @@
+會員系統
+
+一、前端
+1.頁面
+　* 註冊頁（reg.php）
+　* 登入頁
+　* 結果頁(成功/失敗)
+　* 忘記密碼
+
+2.佈局
+　* 獨立置中的表單
+
+3.特效
+　* 無
+
+二、後端
+1.資料庫/資料表(Model)
+* company
+* table=> users
+    > id
+    > account
+    > password
+    > name
+    > tel
+    > national_id
+    > address
+    > email
+    > post_code
+    > created_at
+    > updated_at
+
+2.怎麼連線資料庫
+　* PDO
+　* mysql/mariaDB
+
+3.資料流(控制器Controller)
+  * 從前端拿到資料??(POST,GET)
+    POST
+
+  * 資料要不要檢查?
+    先不要
+
+  * 資料要不要預處理?
+    簡單的處理就好
+
+  * 資料從資料庫取得方式
+    PDO/SQL
+
+  * 資料要不要預處理
+    視前端需求

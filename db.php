@@ -80,7 +80,15 @@ foreach($rows as $row){
 
 
 ?>
-
-
-
 </table>
+
+
+<?php
+$sql="SELECT * FROM category where id=2";
+$row=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+//echo "<pre>";
+//print_r($row);
+//echo "</pre>";
+
+echo $row['name'];
+?>
