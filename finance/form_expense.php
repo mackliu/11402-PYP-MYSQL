@@ -42,9 +42,9 @@ $pdo=new PDO($dsn,'root','');
     <div>
         <label for="store">商店:</label>
         <select name="store" id="store">
-            <?php $stores=$pdo->query("SELECT `id`,`store` FROM `daily_account`")->fetchALL(PDO::FETCH_ASSOC);
+            <?php $stores=$pdo->query("SELECT `id`,`store` FROM `daily_account` GROUP BY `store`")->fetchALL(PDO::FETCH_ASSOC);
                 foreach($stores as $store){
-                    echo "<option value='{$store['id']}'>{$store['store']}</option>";
+                    echo "<option value='{$store['store']}'>{$store['store']}</option>";
             }
             ?>
         </select>
