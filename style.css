@@ -1,0 +1,346 @@
+/* ========================================
+   Common Styles for All Pages
+   ======================================== */
+
+/* make sizing predictable and include pseudo elements */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* ========================================
+   Registration Page (reg.php) Styles
+   ======================================== */
+
+.form-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 480px;
+}
+
+.form-container h2 {
+    text-align: center;
+    color: #333;
+    margin: 0 0 30px 0;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.form-group label {
+    flex: 0 0 100px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+}
+
+/* inputs: consistent height and spacing, responsive */
+.form-container input[type="text"],
+.form-container input[type="password"],
+.form-container input[type="tel"],
+.form-container input[type="email"] {
+    flex: 1;
+    padding: 10px 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-container input[type="text"]:focus,
+.form-container input[type="password"]:focus,
+.form-container input[type="tel"]:focus,
+.form-container input[type="email"]:focus {
+    outline: none;
+    background: #ffffff;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* group buttons in a responsive row */
+.button-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.button-row input[type="submit"],
+.button-row input[type="reset"] {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.button-row input[type="submit"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.button-row input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.button-row input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+.button-row input[type="reset"] {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 2px solid #e0e0e0;
+}
+
+.button-row input[type="reset"]:hover {
+    background-color: #e8e8e8;
+    border-color: #d0d0d0;
+}
+
+/* ========================================
+   Login Page (login.php) Specific Styles
+   ======================================== */
+
+.form-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.form-footer a {
+    color: #667eea;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.form-footer a:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+
+/* ========================================
+   Result Page (result.php) Specific Styles
+   ======================================== */
+
+.container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    gap: 15px;
+}
+
+.success-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.header-text h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.content {
+    margin: 30px 0;
+}
+
+.user-info {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    margin-bottom: 20px;
+}
+
+.info-row {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    flex: 0 0 100px;
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.info-value {
+    flex: 1;
+    color: #333;
+    font-size: 14px;
+}
+
+.message {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 2px solid #e0e0e0;
+}
+
+.btn-secondary:hover {
+    background-color: #e8e8e8;
+    border-color: #d0d0d0;
+}
+
+/* ========================================
+   Responsive Design (all pages)
+   ======================================== */
+
+@media (max-width: 480px) {
+    .form-container,
+    .container {
+        padding: 20px;
+    }
+
+    .form-container h2,
+    .header-text h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 12px;
+    }
+
+    .form-group label {
+        flex: none;
+    }
+
+    .form-container input[type="text"],
+    .form-container input[type="password"],
+    .form-container input[type="tel"],
+    .form-container input[type="email"] {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .button-row input[type="submit"],
+    .button-row input[type="reset"],
+    .btn {
+        padding: 11px 16px;
+        font-size: 14px;
+    }
+
+    .form-footer a {
+        display: block;
+        margin: 8px 0;
+    }
+
+    .header {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .info-label {
+        flex: none;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+}

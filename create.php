@@ -13,6 +13,6 @@ echo $sql;
 $pdo->exec($sql);
 echo "註冊成功";
 
-
+header("location:login.php");
 
 ?>
