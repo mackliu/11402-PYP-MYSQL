@@ -51,9 +51,9 @@ if (count($expenses) > 0) {
             <th>付款方式</th>
             <th>類型</th>
             <th>付款帳戶</th>
-            <th>備註</th>
             <th>日期</th>
             <th>時間</th>
+            <th>操作</th>
         </tr></thead>';
     echo '<tbody>';
     
@@ -68,9 +68,12 @@ if (count($expenses) > 0) {
                 <td><span class='payment-badge'>{$exp['payment_method_name']}</span></td>
                 <td><span class='{$type_class}'>{$exp['type']}</span></td>
                 <td><span class='account-badge'>{$exp['account']}</span></td>
-                <td>{$exp['desc']}</td>
                 <td>{$exp['date']}</td>
                 <td>{$exp['time']}</td>
+                <td>
+                    <a class='btn-edit' href='edit.php?id={$exp['id']}'>編輯</a>
+                    <a class='btn-delete' href='delete.php?id={$exp['id']}'>刪除</a>
+                </td>
             </tr>";
     }
     echo '</tbody>';
