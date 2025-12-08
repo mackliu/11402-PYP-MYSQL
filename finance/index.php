@@ -72,7 +72,7 @@ if (count($expenses) > 0) {
                 <td>{$exp['time']}</td>
                 <td>
                     <a class='btn-edit' href='edit.php?id={$exp['id']}'>編輯</a>
-                    <a class='btn-delete' href='delete.php?id={$exp['id']}'>刪除</a>
+                    <a class='btn-delete' href='javascript:del({$exp['id']})'>刪除</a>
                 </td>
             </tr>";
     }
@@ -95,5 +95,16 @@ if (count($expenses) > 0) {
             <p>💼 記帳系統 | 智慧財務管理</p>
         </div>
     </div>
+
 </body>
+<script>
+function del(id){
+    
+    if(confirm(`確定要刪除編號為 ${id} 的消費紀錄嗎?`)){
+        location.href=`delete.php?id=${id}`;
+    }
+}
+
+
+</script>
 </html>
