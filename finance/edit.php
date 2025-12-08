@@ -4,9 +4,9 @@ $pdo=new PDO($dsn,'root','');
 
 $sql="SELECT * FROM `daily_account` WHERE `id`='{$_GET['id']}'";
 $exp=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
-echo "<pre>";
+/* echo "<pre>";
 print_r($exp);
-echo "</pre>";
+echo "</pre>"; */
 ?>
 
 <!DOCTYPE html>
@@ -19,157 +19,123 @@ echo "</pre>";
 </head>
 <body>
     <div class="container">
-        <div class="form-container">
+        <div class="form-container form-container-wide">
             <h1>💰 編輯消費</h1>
-            <form action="insert_expense.php" method="post">
+            <form action="edit_expense.php" method="post">
+                <input type="hidden" name="id" value="<?=$exp['id'];?>">
                 
-                <div class="form-section">
-                    <h3>基本資訊</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="date">日期 (必填) *</label>
-                            <input type="date" id="date" name="date" value="<?=$exp['date'];?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="time">時間 (必填) *</label>
-                            <input type="time" id="time" name="time" value="<?=$exp['time'];?>" required>
-                        </div>
-                    </div>
-
+                <!-- 第一行：日期、時間、幣別 -->
+                <div class="form-grid-3">
                     <div class="form-group">
-                        <label for="currency">幣別 (必填) *</label>
-                        <div class="radio-group">
-                            <div class="radio-item">
-                                <input type="radio" name="currency" id="currency_twd" value="TWD" <?=($exp['currency']=='TWD')?'checked':'';?>>
-                                <label for="currency_twd">台幣</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="currency" id="currency_usd" value="USD" <?=($exp['currency']=='USD')?'checked':'';?>>
-                                <label for="currency_usd">美元</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="currency" id="currency_aud" value="AUD" <?=($exp['currency']=='AUD')?'checked':'';?>>
-                                <label for="currency_aud">澳幣</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="currency" id="currency_jpy" value="JPY" <?=($exp['currency']=='JPY')?'checked':'';?>>
-                                <label for="currency_jpy">日圓</label>
-                            </div>
-                            <div class="radio-item">
-                                <input type="radio" name="currency" id="currency_cny" value="CNY" <?=($exp['currency']=='CNY')?'checked':'';?>>
-                                <label for="currency_cny">人民幣</label>
-                            </div>
-                        </div>
+                        <label for="date">日期 *</label>
+                        <input type="date" id="date" name="date" value="<?=$exp['date'];?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">時間 *</label>
+                        <input type="time" id="time" name="time" value="<?=$exp['time'];?>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currency">幣別 *</label>
+                        <select id="currency" name="currency" required>
+                            <option value="TWD" <?=($exp['currency']=='TWD')?'selected':'';?>>台幣</option>
+                            <option value="USD" <?=($exp['currency']=='USD')?'selected':'';?>>美元</option>
+                            <option value="AUD" <?=($exp['currency']=='AUD')?'selected':'';?>>澳幣</option>
+                            <option value="JPY" <?=($exp['currency']=='JPY')?'selected':'';?>>日圓</option>
+                            <option value="CNY" <?=($exp['currency']=='CNY')?'selected':'';?>>人民幣</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="form-section">
-                    <h3>消費詳情</h3>
-                    
+                <!-- 第二行：品項、商店 -->
+                <div class="form-grid-2">
                     <div class="form-group">
-                        <label for="item">品項 (必填) *</label>
+                        <label for="item">品項 *</label>
                         <input type="text" id="item" name="item" value="<?=$exp['item'];?>" placeholder="例：咖啡、午餐" required>
                     </div>
-
                     <div class="form-group">
-                        <label for="store">商店 (必填) *</label>
+                        <label for="store">商店 *</label>
                         <select name="store" id="store" required>
-                            <option value="">-- 請選擇或輸入商店 --</option>
+                            <option value="">-- 請選擇商店 --</option>
                             <?php $stores=$pdo->query("SELECT `id`,`store` FROM `daily_account` GROUP BY `store`")->fetchALL(PDO::FETCH_ASSOC);
                                 foreach($stores as $store){
                                     $sel=($exp['store']==$store['store'])?'selected':'';
-
                                     echo "<option value='{$store['store']}' $sel>{$store['store']}</option>";
                             }
                             ?>
                         </select>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="payment">金額 (必填) *</label>
-                            <input type="number" id="payment" name="payment" placeholder="0.00" step="0.01" min="0" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">類別 (必填) *</label>
-                            <select name="category" id="category" required>
-                                <option value="">-- 請選擇類別 --</option>
-                                <?php $categories=$pdo->query("SELECT `id`,`name` FROM `category`")->fetchALL(PDO::FETCH_ASSOC);
-                                    foreach($categories as $cat){
-                                        echo "<option value='{$cat['id']}'>{$cat['name']}</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="form-section">
-                    <h3>付款方式</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="payment_method">付款方式 (必填) *</label>
-                            <select name="payment_method" id="payment_method" required>
-                                <option value="">-- 請選擇付款方式 --</option>
-                                <option value="1">信用卡</option>
-                                <option value="2">現金</option>
-                                <option value="3">電子支付</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="account">付款帳戶 (必填) *</label>
-                            <select name="account" id="account" required>
-                                <option value="">-- 請選擇帳戶 --</option>
-                                <?php 
-                                    $accounts=$pdo->query("SELECT `account` FROM `daily_account` GROUP BY  `account`")->fetchALL(PDO::FETCH_ASSOC);
-                                    
-                                    foreach($accounts as $acc){
-                                        echo "<option value='{$acc['account']}'>{$acc['account']}</option>";
-                                    }
-                                ?>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <h3>交易類型</h3>
-                    
+                <!-- 第三行：金額、類別、付款方式、帳戶 -->
+                <div class="form-grid-4">
                     <div class="form-group">
-                        <label>類型 (必填) *</label>
-                        <div class="radio-group">
+                        <label for="payment">金額 *</label>
+                        <input type="number" id="payment" name="payment" value="<?=$exp['payment'];?>" placeholder="0.00" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">類別 *</label>
+                        <select name="category" id="category" required>
+                            <option value="">-- 請選擇 --</option>
+                            <?php $categories=$pdo->query("SELECT `id`,`name` FROM `category`")->fetchALL(PDO::FETCH_ASSOC);
+                                foreach($categories as $cat){
+                                    $sel=($exp['category']==$cat['id'])?'selected':'';
+                                    echo "<option value='{$cat['id']}' $sel>{$cat['name']}</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment_method">付款方式 *</label>
+                        <select name="payment_method" id="payment_method" required>
+                            <option value="">-- 請選擇 --</option>
+                            <option value="1" <?=($exp['payment_method']=='1')?'selected':'';?>>信用卡</option>
+                            <option value="2" <?=($exp['payment_method']=='2')?'selected':'';?>>現金</option>
+                            <option value="3" <?=($exp['payment_method']=='3')?'selected':'';?>>電子支付</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="account">帳戶 *</label>
+                        <select name="account" id="account" required>
+                            <option value="">-- 請選擇 --</option>
+                            <?php 
+                                $accounts=$pdo->query("SELECT `account` FROM `daily_account` GROUP BY  `account`")->fetchALL(PDO::FETCH_ASSOC);
+                                foreach($accounts as $acc){
+                                    $sel=($exp['account']==$acc['account'])?'selected':'';
+                                    echo "<option value='{$acc['account']}' $sel>{$acc['account']}</option>";
+                                }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 第四行：交易類型、備註 -->
+                <div class="form-grid-2">
+                    <div class="form-group">
+                        <label>交易類型 *</label>
+                        <div class="radio-group-inline">
                             <div class="radio-item">
-                                <input type="radio" id="type_expense" name="type" value="支出" checked required>
+                                <input type="radio" id="type_expense" name="type" value="支出" <?=($exp['type']=='支出')?'checked':'';?> required>
                                 <label for="type_expense">支出</label>
                             </div>
                             <div class="radio-item">
-                                <input type="radio" id="type_income" name="type" value="收入" required>
+                                <input type="radio" id="type_income" name="type" value="收入" <?=($exp['type']=='收入')?'checked':'';?> required>
                                 <label for="type_income">收入</label>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-section">
-                    <h3>備註</h3>
-                    
                     <div class="form-group">
-                        <label for="desc">描述說明</label>
-                        <textarea id="desc" name="desc" placeholder="輸入任何備註或說明..." rows="3" style="resize: vertical;"></textarea>
+                        <label for="desc">備註說明</label>
+                        <textarea id="desc" name="desc" placeholder="輸入任何備註..." style="resize: vertical;"><?=$exp['desc'];?></textarea>
                     </div>
                 </div>
 
+                <!-- 按鈕行 -->
                 <div class="form-buttons">
-                    <input type="submit" value="💾 新增消費">
+                    <input type="submit" value="💾 保存修改">
                     <input type="reset" value="🔄 重置">
+                    <a href="index.php" class="btn btn-secondary">🔙 返回</a>
                 </div>
             </form>
-
-            <div class="back-link">
-                <a href="index.php">🔙 返回首頁</a>
-            </div>
         </div>
     </div>
 </body>
