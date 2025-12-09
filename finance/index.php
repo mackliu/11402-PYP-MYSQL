@@ -1,6 +1,7 @@
 <?php
-$dsn="mysql:host=localhost;dbname=finance_db;charset=utf8";
-$pdo=new PDO($dsn,'root','');
+/* $dsn="mysql:host=localhost;dbname=finance_db;charset=utf8";
+$pdo=new PDO($dsn,'root',''); */
+include_once "sql.php";
 
 ?>
 
@@ -25,7 +26,7 @@ $pdo=new PDO($dsn,'root','');
 
         <div class="table-wrapper">
 <?php
-$expenses=$pdo->query("SELECT `daily_account`.*,
+$expenses=q("SELECT `daily_account`.*,
                               `category`.`name` AS `category_name`,
                               `payment_method`.`name` AS `payment_method_name`
                         FROM `daily_account`,
@@ -34,7 +35,7 @@ $expenses=$pdo->query("SELECT `daily_account`.*,
                         WHERE `daily_account`.`category`=`category`.`id`
                                 AND `daily_account`.`payment_method`=`payment_method`.`id`
                     Order By `date` DESC, 
-                             `time` DESC")->fetchALL(PDO::FETCH_ASSOC);
+                             `time` DESC");
 
 if (count($expenses) > 0) {
     echo '<div class="table-header">';

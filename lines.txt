@@ -1,12 +1,19 @@
 檔案名稱           副檔名 行數
 --------           ------ ----
-delete.php         .php      7
-edit.php           .php    136
-edit_expense.php   .php     24
-* finance.md       .md      22
-form_expense.php   .php    158
-index.php          .php    102
-insert_expense.php .php      9
-* sql.php          .php    112
-* style.css        .css    594
-* test.php         .php      7
+delete.php         .php      7 5  
+edit.php           .php    136 134  
+edit_expense.php   .php     24 4  
+form_expense.php   .php    158 158  
+index.php          .php    102 103  
+insert_expense.php .php      9 4  
+
+
+delete.php	        .php	5
+edit.php	        .php	134
+edit_expense.php	.php	4
+form_expense.php	.php	158
+index.php	        .php	103
+insert_expense.php	.php	4
+
+
+總計		1,147

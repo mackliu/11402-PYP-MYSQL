@@ -26,7 +26,7 @@ update('category',$row);
  */
 
 
-delete('category','11');
+//delete('category','11');
 
 function all($table='daily_account',$where=[],$desc=' ORDER BY `id` ASC'){
     
@@ -45,8 +45,8 @@ function all($table='daily_account',$where=[],$desc=' ORDER BY `id` ASC'){
 
     $sql .= $desc;
 
-   echo $sql;
-    echo "<hr>";
+    //echo $sql;
+    //echo "<hr>";
     
     $rows=$pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
     
@@ -66,8 +66,8 @@ function find($table,$id){
     }else{
         $sql .= " WHERE `id`='$id' ";
     }
-    echo $sql;
-    echo "<hr>";
+    //echo $sql;
+    //echo "<hr>";
     
     $row=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     
@@ -83,8 +83,8 @@ function insert($table,$array){
     $keys=array_keys($array);
     $sql .="(`". join("`,`",$keys). "`)";
     $sql .=" VALUES ('". join("','",$array). "')";
-    echo $sql;
-    echo "<hr>";
+   // echo $sql;
+    //echo "<hr>";
     return $pdo->exec($sql);
 }
 
@@ -101,8 +101,8 @@ function update($table,$array,$limit=[]){
         $sql .=" WHERE id='{$array['id']}'";
     }
 
-    echo $sql;
-    echo "<hr>";
+    //echo $sql;
+    //echo "<hr>";
 
     return $pdo->exec($sql);
 }
@@ -116,11 +116,18 @@ function delete($table,$id){
     }else{
         $sql .= " WHERE `id`='$id' ";
     }
-    echo $sql;
-    echo "<hr>";
+    //echo $sql;
+    //echo "<hr>";
     
     return $pdo->exec($sql);
 }
+
+function q($sql){
+    global $pdo;
+    return $pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
+}
+
+
 function array_trans($array){
     foreach($array as $key => $value){
         $tmp[]="`$key`='$value'";

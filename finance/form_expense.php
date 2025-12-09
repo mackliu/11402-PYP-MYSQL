@@ -1,6 +1,5 @@
 <?php 
-$dsn="mysql:host=localhost;dbname=finance_db;charset=utf8";
-$pdo=new PDO($dsn,'root','');
+include_once "sql.php";
 
 ?>
 
@@ -71,7 +70,8 @@ $pdo=new PDO($dsn,'root','');
                         <label for="store">商店 (必填) *</label>
                         <select name="store" id="store" required>
                             <option value="">-- 請選擇或輸入商店 --</option>
-                            <?php $stores=$pdo->query("SELECT `id`,`store` FROM `daily_account` GROUP BY `store`")->fetchALL(PDO::FETCH_ASSOC);
+                            <?php 
+                            $stores=all('daily_account',[]," GROUP BY `store`");
                                 foreach($stores as $store){
                                     echo "<option value='{$store['store']}'>{$store['store']}</option>";
                             }
@@ -88,7 +88,7 @@ $pdo=new PDO($dsn,'root','');
                             <label for="category">類別 (必填) *</label>
                             <select name="category" id="category" required>
                                 <option value="">-- 請選擇類別 --</option>
-                                <?php $categories=$pdo->query("SELECT `id`,`name` FROM `category`")->fetchALL(PDO::FETCH_ASSOC);
+                                <?php $categories=all('category');
                                     foreach($categories as $cat){
                                         echo "<option value='{$cat['id']}'>{$cat['name']}</option>";
                                     }
@@ -116,7 +116,7 @@ $pdo=new PDO($dsn,'root','');
                             <select name="account" id="account" required>
                                 <option value="">-- 請選擇帳戶 --</option>
                                 <?php 
-                                    $accounts=$pdo->query("SELECT `account` FROM `daily_account` GROUP BY  `account`")->fetchALL(PDO::FETCH_ASSOC);
+                                    $accounts=all('daily_account',[]," GROUP BY `account`");
                                     
                                     foreach($accounts as $acc){
                                         echo "<option value='{$acc['account']}'>{$acc['account']}</option>";

@@ -1,9 +1,7 @@
 <?php 
-$dsn="mysql:host=localhost;dbname=finance_db;charset=utf8";
-$pdo=new PDO($dsn,'root','');
+include_once "sql.php";
 
-$sql="SELECT * FROM `daily_account` WHERE `id`='{$_GET['id']}'";
-$exp=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+$exp=find('daily_account',$_GET['id']);
 /* echo "<pre>";
 print_r($exp);
 echo "</pre>"; */
@@ -56,7 +54,7 @@ echo "</pre>"; */
                         <label for="store">商店 *</label>
                         <select name="store" id="store" required>
                             <option value="">-- 請選擇商店 --</option>
-                            <?php $stores=$pdo->query("SELECT `id`,`store` FROM `daily_account` GROUP BY `store`")->fetchALL(PDO::FETCH_ASSOC);
+                            <?php $stores=all('daily_account',[]," GROUP BY `store`");
                                 foreach($stores as $store){
                                     $sel=($exp['store']==$store['store'])?'selected':'';
                                     echo "<option value='{$store['store']}' $sel>{$store['store']}</option>";
@@ -76,7 +74,7 @@ echo "</pre>"; */
                         <label for="category">類別 *</label>
                         <select name="category" id="category" required>
                             <option value="">-- 請選擇 --</option>
-                            <?php $categories=$pdo->query("SELECT `id`,`name` FROM `category`")->fetchALL(PDO::FETCH_ASSOC);
+                            <?php $categories=all('category');
                                 foreach($categories as $cat){
                                     $sel=($exp['category']==$cat['id'])?'selected':'';
                                     echo "<option value='{$cat['id']}' $sel>{$cat['name']}</option>";
@@ -98,7 +96,7 @@ echo "</pre>"; */
                         <select name="account" id="account" required>
                             <option value="">-- 請選擇 --</option>
                             <?php 
-                                $accounts=$pdo->query("SELECT `account` FROM `daily_account` GROUP BY  `account`")->fetchALL(PDO::FETCH_ASSOC);
+                                $accounts=all('daily_account',[]," GROUP BY `account`");
                                 foreach($accounts as $acc){
                                     $sel=($exp['account']==$acc['account'])?'selected':'';
                                     echo "<option value='{$acc['account']}' $sel>{$acc['account']}</option>";
