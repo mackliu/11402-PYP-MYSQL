@@ -12,7 +12,21 @@ echo "</pre>"; */
     $pdo=new PDO($dsn,'root','');
 
 //all();
-insert('category',['name'=>'出差']);
+//insert('category',['name'=>'出差']);
+/* $row=find('category','11');
+echo "<pre>";
+print_r($row);
+echo "</pre>";
+echo "<hr>";
+$row['name']='公益慈善';
+echo "<pre>";
+print_r($row);
+echo "</pre>";
+update('category',$row);
+ */
+
+
+delete('category','11');
 
 function all($table='daily_account',$where=[],$desc=' ORDER BY `id` ASC'){
     
@@ -81,11 +95,15 @@ function update($table,$array,$limit=[]){
     $tmp=array_trans($array);
     $sql .=" SET ".join(", ",$tmp);
     if(!empty($limit)){
-        $tmp2=array_trans($limit);
+        $tmp=array_trans($limit);
         $sql .=" WHERE ".join(" && ",$tmp2);
     }else{
         $sql .=" WHERE id='{$array['id']}'";
     }
+
+    echo $sql;
+    echo "<hr>";
+
     return $pdo->exec($sql);
 }
 function delete($table,$id){
