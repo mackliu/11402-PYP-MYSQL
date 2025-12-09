@@ -1,5 +1,13 @@
 <?php
 //all();
+echo "<pre>";
+print_r(all('daily_account',['id'=>'13'])[0]['item']);
+echo "</pre>";
+echo "<br>";
+echo "<pre>";
+print_r(find('category', 1)['name']);
+echo "</pre>";
+
 
 function all($table='daily_account',$where=[],$desc=' ORDER BY `id` ASC'){
     $dsn="mysql:host=localhost;charset=utf8;dbname=finance_db";
@@ -27,5 +35,19 @@ function all($table='daily_account',$where=[],$desc=' ORDER BY `id` ASC'){
     return $rows;
 }
 
+function find($table,$id){
 
+    $dsn="mysql:host=localhost;charset=utf8;dbname=finance_db";
+    $pdo=new PDO($dsn,'root','');
+    
+    $sql="SELECT * FROM `{$table}` WHERE `id`='$id'";
+
+    echo $sql;
+    echo "<hr>";
+    
+    $row=$pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    
+    return $row;
+
+}
 ?>
