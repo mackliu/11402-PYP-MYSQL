@@ -7,3 +7,4 @@ $rows=all('daily_account',['payment_method'=>'3']);
 foreach($rows as $r){
     echo $r['id'].'. '.$r['item'].'<br>';
 }
+

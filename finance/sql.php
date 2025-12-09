@@ -1,11 +1,11 @@
 <?php
 //all();
 echo "<pre>";
-print_r(all('daily_account',['id'=>'13'])[0]['item']);
+print_r(all('daily_account',['id'=>'14']));
 echo "</pre>";
 echo "<br>";
 echo "<pre>";
-print_r(find('category', 1)['name']);
+print_r(find('daily_account', ['id'=>'14']));
 echo "</pre>";
 
 
@@ -40,8 +40,16 @@ function find($table,$id){
     $dsn="mysql:host=localhost;charset=utf8;dbname=finance_db";
     $pdo=new PDO($dsn,'root','');
     
-    $sql="SELECT * FROM `{$table}` WHERE `id`='$id'";
-
+    $sql="SELECT * FROM `{$table}` ";
+    if(is_array($id)){
+        
+        foreach($id as $key => $value){
+               $tmp[]="`$key`='$value'";
+           }
+           $sql .= " WHERE ".join(" && ",$tmp) ;
+    }else{
+        $sql .= " WHERE `id`='$id' ";
+    }
     echo $sql;
     echo "<hr>";
     
