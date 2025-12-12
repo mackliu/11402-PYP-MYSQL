@@ -134,4 +134,6 @@ function array_trans($array){
     }
  return $tmp;          
 }
+
+all('category'," order by `id` desc ");
 ?>

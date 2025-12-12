@@ -1,5 +1,6 @@
 <?php 
-include_once "sql.php";
+#include_once "sql.php";
+include_once "DB.php";
 
 ?>
 
@@ -71,7 +72,7 @@ include_once "sql.php";
                         <select name="store" id="store" required>
                             <option value="">-- 請選擇或輸入商店 --</option>
                             <?php 
-                            $stores=all('daily_account',[]," GROUP BY `store`");
+                            $stores=$Daily->all(" GROUP BY `store`");
                                 foreach($stores as $store){
                                     echo "<option value='{$store['store']}'>{$store['store']}</option>";
                             }
@@ -88,7 +89,7 @@ include_once "sql.php";
                             <label for="category">類別 (必填) *</label>
                             <select name="category" id="category" required>
                                 <option value="">-- 請選擇類別 --</option>
-                                <?php $categories=all('category');
+                                <?php $categories=$Category->all();
                                     foreach($categories as $cat){
                                         echo "<option value='{$cat['id']}'>{$cat['name']}</option>";
                                     }
@@ -116,7 +117,7 @@ include_once "sql.php";
                             <select name="account" id="account" required>
                                 <option value="">-- 請選擇帳戶 --</option>
                                 <?php 
-                                    $accounts=all('daily_account',[]," GROUP BY `account`");
+                                    $accounts=$Daily->all(" GROUP BY `account`");
                                     
                                     foreach($accounts as $acc){
                                         echo "<option value='{$acc['account']}'>{$acc['account']}</option>";

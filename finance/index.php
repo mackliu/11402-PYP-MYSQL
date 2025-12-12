@@ -1,7 +1,8 @@
 <?php
 /* $dsn="mysql:host=localhost;dbname=finance_db;charset=utf8";
 $pdo=new PDO($dsn,'root',''); */
-include_once "sql.php";
+//include_once "sql.php";
+include_once "DB.php";
 
 ?>
 

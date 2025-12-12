@@ -1,7 +1,9 @@
 <?php 
-include_once "sql.php";
+//include_once "sql.php";
+include_once "DB.php";
 
-$exp=find('daily_account',$_GET['id']);
+//$exp=find('daily_account',$_GET['id']);
+$exp=$Daily->find($_GET['id']);
 /* echo "<pre>";
 print_r($exp);
 echo "</pre>"; */
@@ -54,7 +56,8 @@ echo "</pre>"; */
                         <label for="store">商店 *</label>
                         <select name="store" id="store" required>
                             <option value="">-- 請選擇商店 --</option>
-                            <?php $stores=all('daily_account',[]," GROUP BY `store`");
+                            
+                            <?php $stores=$Daily->all(" GROUP BY `store`");
                                 foreach($stores as $store){
                                     $sel=($exp['store']==$store['store'])?'selected':'';
                                     echo "<option value='{$store['store']}' $sel>{$store['store']}</option>";
@@ -74,7 +77,7 @@ echo "</pre>"; */
                         <label for="category">類別 *</label>
                         <select name="category" id="category" required>
                             <option value="">-- 請選擇 --</option>
-                            <?php $categories=all('category');
+                            <?php $categories=$Category->all();
                                 foreach($categories as $cat){
                                     $sel=($exp['category']==$cat['id'])?'selected':'';
                                     echo "<option value='{$cat['id']}' $sel>{$cat['name']}</option>";
@@ -96,7 +99,7 @@ echo "</pre>"; */
                         <select name="account" id="account" required>
                             <option value="">-- 請選擇 --</option>
                             <?php 
-                                $accounts=all('daily_account',[]," GROUP BY `account`");
+                                $accounts=$Daily->all(" GROUP BY `account`");
                                 foreach($accounts as $acc){
                                     $sel=($exp['account']==$acc['account'])?'selected':'';
                                     echo "<option value='{$acc['account']}' $sel>{$acc['account']}</option>";
